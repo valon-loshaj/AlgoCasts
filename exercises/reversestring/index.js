@@ -8,7 +8,7 @@
 
 function reverse(str) {
 	// Step 1: Turn str into an array using .split
-	// Step 2: Use reduce to
+	// Step 2: Use reduce to aggregate final reversed string
 	return str
 		.split("")
 		.reduce((reversed, character) => character + reversed, "");
