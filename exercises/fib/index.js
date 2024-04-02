@@ -8,6 +8,50 @@
 // Example:
 //   fib(4) === 3
 
-function fib(n) {}
+function memoize(fn) {
+	const cache = {};
+	return function (...args) {
+		if (cache[args]) {
+			return cache[args];
+		}
+
+		const result = fn.apply(this, args);
+		cache[args] = result;
+
+		return result;
+	};
+}
+
+function slowFib(n) {
+	if (n < 2) {
+		return n;
+	}
+
+	return fib(n - 1) + fib(n - 2);
+}
+
+const fib = memoize(slowFib);
 
 module.exports = fib;
+
+/* Solution 1 (iterative)
+	step 1: create an empty array that will contain the fib series
+	step 2: create an iterator that goes up to n
+	step 3: loop through the iterator following the fib rules
+	step 4: return the nth value of the array
+	*/
+
+// let results = [0, 1];
+// for (let i = 2; i <= n; i++) {
+// 	const int = results[i - 1] + results[i - 2];
+// 	results.push(int);
+// }
+// return results[n];
+
+/*solution 2 (slow)
+	if (n < 2) {
+		return n;
+	}
+
+	return fib(n - 1) + fib(n - 2);
+	*/
